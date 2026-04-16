@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prestige Immobilier — Abidjan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5F0E8;--cream2:#EDE5D4;--gold:#B8952A;--gold2:#D4AF5A;--gold3:#F0D080;
+  --dark:#0F0E0C;--dark2:#1A1815;--dark3:#252320;--dark4:#312F2B;
+  --text:#2C2A26;--muted:#8C8578;--white:#FFFFFF;
+  --serif:'Cormorant Garamond',serif;--sans:'Outfit',sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* ─── CURSOR ─── */
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .15s var(--ease);mix-blend-mode:multiply}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .35s var(--ease),opacity .2s}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;transition:all .4s var(--ease)}
+nav.scrolled{background:rgba(245,240,232,.95);backdrop-filter:blur(20px);padding:1rem 4rem;border-bottom:1px solid rgba(184,149,42,.15)}
+.nav-logo{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--dark);letter-spacing:.02em;text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.8rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{padding:.65rem 1.75rem;background:var(--dark);color:var(--cream);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:1px;transition:background .2s}
+.nav-cta:hover{background:var(--gold)}
+
+/* ─── HERO ─── */
+.hero{height:100vh;min-height:700px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 4rem 5rem;background:var(--dark2);position:relative;z-index:2}
+.hero-left::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B8952A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.hero-eyebrow{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+.hero-title{font-family:var(--serif);font-size:clamp(3rem,5vw,5rem);font-weight:300;line-height:1.05;color:var(--cream);letter-spacing:-.01em;margin-bottom:1.5rem}
+.hero-title em{font-style:italic;color:var(--gold2)}
+.hero-desc{font-size:.925rem;color:rgba(245,240,232,.5);line-height:1.8;max-width:360px;font-weight:300;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem}
+.btn-gold{padding:.9rem 2.25rem;background:var(--gold);color:var(--dark);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:1px;display:inline-flex;align-items:center;gap:.6rem;transition:all .25s}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-ghost{padding:.9rem 2.25rem;background:transparent;color:var(--cream);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(245,240,232,.2);border-radius:1px;display:inline-flex;align-items:center;gap:.6rem;transition:all .25s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-right{position:relative;overflow:hidden}
+.hero-img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,14,12,.3) 0%,transparent 60%)}
+.hero-badge{position:absolute;bottom:2.5rem;right:2.5rem;background:var(--cream);padding:1.25rem 1.5rem;border-radius:2px}
+.hero-badge-num{font-family:var(--serif);font-size:2.5rem;font-weight:600;color:var(--gold);line-height:1}
+.hero-badge-label{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.25rem}
+.hero-stats{position:absolute;bottom:0;left:0;right:0;background:rgba(15,14,12,.85);backdrop-filter:blur(10px);display:flex;padding:1.25rem 4rem;gap:4rem;z-index:3}
+.hero-stat-val{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--gold2)}
+.hero-stat-label{font-size:.7rem;color:rgba(245,240,232,.4);letter-spacing:.08em;text-transform:uppercase;margin-top:.2rem}
+
+/* ─── SEARCH BAR ─── */
+.search-bar{background:var(--white);margin:0 4rem;margin-top:-2.5rem;position:relative;z-index:10;border-radius:2px;box-shadow:0 20px 60px rgba(15,14,12,.12);display:flex;align-items:center;padding:.5rem .5rem .5rem 1.5rem;gap:1rem}
+.search-tabs{display:flex;gap:0;border-radius:1px;overflow:hidden;margin-right:.5rem}
+.search-tab{padding:.6rem 1.25rem;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;background:transparent;color:var(--muted);border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+.search-tab.active{background:var(--dark);color:var(--cream)}
+.search-divider{width:1px;height:2rem;background:var(--cream2);flex-shrink:0}
+.search-field{display:flex;flex-direction:column;flex:1;min-width:120px}
+.search-field label{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.search-field select,.search-field input{border:none;outline:none;font-family:var(--sans);font-size:.875rem;color:var(--text);background:transparent;padding:0;cursor:pointer;appearance:none}
+.search-btn{padding:1rem 2rem;background:var(--gold);color:var(--dark);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;border-radius:1px;white-space:nowrap;transition:background .2s;flex-shrink:0}
+.search-btn:hover{background:var(--gold2)}
+
+/* ─── SECTION BASE ─── */
+section{padding:6rem 4rem}
+.eyebrow{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.25rem);font-weight:300;line-height:1.1;color:var(--dark);letter-spacing:-.01em}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-sub{font-size:.9rem;color:var(--muted);max-width:440px;line-height:1.8;font-weight:300;margin-top:.75rem}
+
+/* ─── PROPERTIES ─── */
+.props-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
+.props-filters{display:flex;gap:.5rem;flex-wrap:wrap}
+.filter-btn{padding:.5rem 1.25rem;font-size:.75rem;font-weight:500;letter-spacing:.06em;background:transparent;border:1px solid var(--cream2);border-radius:100px;cursor:pointer;color:var(--muted);transition:all .2s;text-transform:uppercase}
+.filter-btn.active,.filter-btn:hover{background:var(--dark);color:var(--cream);border-color:var(--dark)}
+.props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.prop-card{background:var(--white);border-radius:2px;overflow:hidden;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.prop-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(15,14,12,.12)}
+.prop-card.featured{grid-column:span 2}
+.prop-img-wrap{position:relative;overflow:hidden}
+.prop-img{width:100%;height:260px;object-fit:cover;transition:transform .5s var(--ease);display:block;background:var(--cream2)}
+.prop-card.featured .prop-img{height:360px}
+.prop-card:hover .prop-img{transform:scale(1.04)}
+.prop-badge{position:absolute;top:1rem;left:1rem;background:var(--gold);color:var(--dark);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:1px}
+.prop-badge.new{background:var(--dark);color:var(--cream)}
+.prop-badge.exclu{background:var(--white);color:var(--gold)}
+.prop-fav{position:absolute;top:1rem;right:1rem;width:2.25rem;height:2.25rem;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;cursor:pointer}
+.prop-fav:hover{background:var(--white);transform:scale(1.1)}
+.prop-body{padding:1.5rem}
+.prop-type{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.prop-name{font-family:var(--serif);font-size:1.35rem;font-weight:400;color:var(--dark);line-height:1.2;margin-bottom:.4rem}
+.prop-loc{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.35rem;margin-bottom:1.25rem}
+.prop-details{display:flex;gap:1.25rem;padding-top:1.25rem;border-top:1px solid var(--cream2)}
+.prop-detail{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted)}
+.prop-detail-icon{font-size:.9rem}
+.prop-price-row{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--cream2)}
+.prop-price{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--dark)}
+.prop-price small{font-size:.8rem;font-weight:300;font-family:var(--sans);color:var(--muted)}
+.prop-btn{padding:.55rem 1.25rem;background:var(--dark);color:var(--cream);font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;border-radius:1px;transition:background .2s}
+.prop-btn:hover{background:var(--gold)}
+
+/* ─── FEATURED LISTING ─── */
+.listing-section{background:var(--dark2);color:var(--cream);padding:6rem 4rem}
+.listing-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem}
+.listing-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.listing-img-main{grid-column:span 2;height:300px;background:var(--dark4);border-radius:2px;overflow:hidden}
+.listing-img-main img{width:100%;height:100%;object-fit:cover;filter:brightness(.9)}
+.listing-img-sm{height:160px;background:var(--dark4);border-radius:2px;overflow:hidden}
+.listing-img-sm img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
+.listing-tag{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+.listing-tag::before{content:'';width:2rem;height:1px;background:var(--gold)}
+.listing-title{font-family:var(--serif);font-size:clamp(2rem,3vw,3rem);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:1.25rem}
+.listing-title em{font-style:italic;color:var(--gold2)}
+.listing-desc{font-size:.875rem;color:rgba(245,240,232,.55);line-height:1.9;font-weight:300;margin-bottom:2rem}
+.listing-specs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.listing-spec{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:1rem 1.25rem;border-radius:1px}
+.listing-spec-label{font-size:.65rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:.35rem}
+.listing-spec-val{font-family:var(--serif);font-size:1.25rem;font-weight:400;color:var(--cream)}
+.listing-price-box{background:var(--gold);padding:1.5rem 2rem;border-radius:1px;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.listing-price-label{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(15,14,12,.6)}
+.listing-price-val{font-family:var(--serif);font-size:2rem;font-weight:600;color:var(--dark)}
+
+/* ─── ABOUT / WHY ─── */
+.why-section{padding:6rem 4rem;background:var(--cream2)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;margin-top:4rem}
+.why-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.why-card{background:var(--white);padding:1.75rem;border-radius:2px;border-bottom:3px solid transparent;transition:border-color .25s}
+.why-card:hover{border-color:var(--gold)}
+.why-card-icon{font-size:1.75rem;margin-bottom:1rem}
+.why-card-title{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:var(--dark);margin-bottom:.5rem}
+.why-card-desc{font-size:.8rem;color:var(--muted);line-height:1.7}
+.why-visual{position:relative}
+.why-img{width:100%;height:520px;object-fit:cover;border-radius:2px;filter:brightness(.9)}
+.why-img-box{overflow:hidden;border-radius:2px}
+.why-stat-card{position:absolute;bottom:-1.5rem;left:-1.5rem;background:var(--gold);padding:1.5rem 2rem;border-radius:2px}
+.why-stat-num{font-family:var(--serif);font-size:2.5rem;font-weight:600;color:var(--dark);line-height:1}
+.why-stat-label{font-size:.7rem;color:rgba(15,14,12,.6);text-transform:uppercase;letter-spacing:.1em;margin-top:.35rem}
+
+/* ─── TESTIMONIALS ─── */
+.test-section{padding:6rem 4rem;background:var(--dark);overflow:hidden}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+.test-card{background:var(--dark3);border:1px solid rgba(255,255,255,.05);padding:2rem;border-radius:2px;position:relative}
+.test-card::before{content:'"';font-family:var(--serif);font-size:4rem;color:var(--gold);opacity:.3;position:absolute;top:.5rem;left:1.5rem;line-height:1}
+.test-text{font-size:.9rem;color:rgba(245,240,232,.65);line-height:1.8;font-weight:300;margin-bottom:1.5rem;padding-top:1.5rem}
+.test-author{display:flex;align-items:center;gap:.75rem}
+.test-avatar{width:2.75rem;height:2.75rem;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.9rem;font-weight:600;color:var(--dark)}
+.test-name{font-size:.875rem;font-weight:500;color:var(--cream)}
+.test-role{font-size:.75rem;color:var(--muted)}
+.test-stars{color:var(--gold2);font-size:.8rem;margin-top:.25rem}
+
+/* ─── AGENTS ─── */
+.agents-section{padding:6rem 4rem}
+.agents-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem}
+.agent-card{text-align:center}
+.agent-img-wrap{position:relative;margin-bottom:1.25rem}
+.agent-img{width:100%;height:280px;object-fit:cover;border-radius:2px;filter:grayscale(20%);transition:filter .3s}
+.agent-card:hover .agent-img{filter:grayscale(0%)}
+.agent-flag{position:absolute;bottom:.75rem;right:.75rem;background:var(--gold);width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.agent-name{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--dark);margin-bottom:.2rem}
+.agent-role{font-size:.75rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
+.agent-contacts{display:flex;justify-content:center;gap:.5rem}
+.agent-contact{width:2rem;height:2rem;background:var(--cream2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;text-decoration:none;color:var(--muted);transition:all .2s}
+.agent-contact:hover{background:var(--gold);color:var(--dark)}
+
+/* ─── CTA BANNER ─── */
+.cta-banner{margin:0 4rem 6rem;background:var(--dark);border-radius:2px;padding:4rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:3rem;position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(184,149,42,.15) 0%,transparent 60%);pointer-events:none}
+.cta-title{font-family:var(--serif);font-size:clamp(1.75rem,3vw,2.75rem);font-weight:300;color:var(--cream);line-height:1.2}
+.cta-title em{font-style:italic;color:var(--gold2)}
+.cta-sub{font-size:.875rem;color:rgba(245,240,232,.45);margin-top:.75rem;font-weight:300;line-height:1.7}
+.cta-form{display:flex;gap:.5rem;flex-wrap:wrap}
+.cta-input{padding:.9rem 1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:1px;color:var(--cream);font-family:var(--sans);font-size:.875rem;outline:none;min-width:240px;transition:border-color .2s}
+.cta-input::placeholder{color:rgba(245,240,232,.3)}
+.cta-input:focus{border-color:var(--gold)}
+.cta-submit{padding:.9rem 2rem;background:var(--gold);color:var(--dark);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;border-radius:1px;transition:background .2s;white-space:nowrap}
+.cta-submit:hover{background:var(--gold2)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--dark2);color:rgba(245,240,232,.5);padding:4rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+.footer-logo{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cream);margin-bottom:1rem}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.825rem;line-height:1.8;color:rgba(245,240,232,.4);font-weight:300;max-width:260px;margin-bottom:1.5rem}
+.footer-socials{display:flex;gap:.75rem}
+.footer-social{width:2.25rem;height:2.25rem;border:1px solid rgba(245,240,232,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.875rem;text-decoration:none;color:rgba(245,240,232,.4);transition:all .2s}
+.footer-social:hover{border-color:var(--gold);color:var(--gold)}
+.footer-col-title{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-bottom:1.25rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{font-size:.825rem;color:rgba(245,240,232,.35);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(245,240,232,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;flex-wrap:wrap;gap:1rem}
+.footer-copy{color:rgba(245,240,232,.25)}
+
+/* ─── PLACEHOLDER IMAGES (CSS art) ─── */
+.img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.p-villa{background:linear-gradient(135deg,#2D3A2D 0%,#4A6741 40%,#8B7355 100%)}
+.p-appart{background:linear-gradient(160deg,#1E3A5F 0%,#2E5B8A 50%,#4A7BA8 100%)}
+.p-bureau{background:linear-gradient(135deg,#3A3020 0%,#6B5A3A 50%,#8B7A5A 100%)}
+.p-duplex{background:linear-gradient(160deg,#2A1A3A 0%,#5A3570 50%,#8B6B9B 100%)}
+.p-terrain{background:linear-gradient(135deg,#3A2A1A 0%,#7A5A3A 50%,#AA8A6A 100%)}
+.p-imm{background:linear-gradient(160deg,#1A2A3A 0%,#3A5A7A 50%,#5A8AAA 100%)}
+
+/* ─── WHATSAPP FLOAT ─── */
+.wa-float{position:fixed;bottom:2rem;right:2rem;width:3.5rem;height:3.5rem;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;z-index:200;box-shadow:0 8px 30px rgba(37,211,102,.4);text-decoration:none;transition:transform .2s}
+.wa-float:hover{transform:scale(1.1)}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.fade-up.vis{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:1.25rem 1.5rem}nav.scrolled{padding:.9rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  .hero{grid-template-columns:1fr;height:auto}
+  .hero-left{padding:7rem 1.5rem 4rem}
+  .hero-right{height:300px}
+  .hero-stats{padding:1rem 1.5rem;gap:2rem}
+  .search-bar{margin:0 1.5rem;flex-wrap:wrap;margin-top:-2rem;padding:1rem}
+  section{padding:4rem 1.5rem}
+  .listing-section,.why-section,.test-section,.agents-section{padding:4rem 1.5rem}
+  .props-grid,.listing-grid,.why-grid,.test-grid,.agents-grid{grid-template-columns:1fr}
+  .prop-card.featured{grid-column:span 1}
+  .listing-imgs{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .cta-banner{margin:0 1.5rem 4rem;padding:2.5rem 1.5rem;grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Prestige<span>Immo</span></a>
+  <ul class="nav-links">
+    <li><a href="#biens">Nos biens</a></li>
+    <li><a href="#selection">À la une</a></li>
+    <li><a href="#agence">L'agence</a></li>
+    <li><a href="#agents">Équipe</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+2250700000000" class="nav-cta">📞 Nous appeler</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Abidjan · Côte d'Ivoire</div>
+    <h1 class="hero-title">L'immobilier<br>de <em>prestige</em><br>à Abidjan</h1>
+    <p class="hero-desc">Appartements, villas, duplex et bureaux haut standing. Chaque bien sélectionné pour son excellence et son emplacement stratégique.</p>
+    <div class="hero-actions">
+      <a href="#biens" class="btn-gold">Découvrir nos biens →</a>
+      <a href="#contact" class="btn-ghost">Estimation gratuite</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="img-placeholder p-villa">
+      <span style="position:absolute;bottom:1rem;left:1rem;color:rgba(255,255,255,.9);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;text-shadow:0 2px 8px rgba(0,0,0,.5)">Villa de luxe · Cocody</span>
+    </div>
+    <div class="hero-img-overlay"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-num">350+</div>
+      <div class="hero-badge-label">Biens vendus</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hero-stat-val">12 ans</div><div class="hero-stat-label">D'expérience</div></div>
+    <div><div class="hero-stat-val">98%</div><div class="hero-stat-label">Clients satisfaits</div></div>
+    <div><div class="hero-stat-val">Cocody · Plateau · Zone 4</div><div class="hero-stat-label">Nos zones d'expertise</div></div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <div class="search-tabs">
+    <button class="search-tab active" onclick="setTab(this,'Acheter')">Acheter</button>
+    <button class="search-tab" onclick="setTab(this,'Louer')">Louer</button>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <label>Localisation</label>
+    <select>
+      <option>Toutes communes</option>
+      <option>Cocody — Riviera</option>
+      <option>Plateau</option>
+      <option>Marcory — Zone 4</option>
+      <option>Angré</option>
+      <option>2 Plateaux</option>
+    </select>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <label>Type de bien</label>
+    <select>
+      <option>Tous les biens</option>
+      <option>Villa</option>
+      <option>Appartement</option>
+      <option>Duplex</option>
+      <option>Bureau</option>
+      <option>Terrain</option>
+    </select>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <label>Budget max</label>
+    <select>
+      <option>Sans limite</option>
+      <option>50 millions FCFA</option>
+      <option>100 millions FCFA</option>
+      <option>200 millions FCFA</option>
+      <option>500 millions FCFA</option>
+    </select>
+  </div>
+  <div class="search-divider"></div>
+  <div class="search-field">
+    <label>Chambres</label>
+    <select><option>Toutes</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select>
+  </div>
+  <button class="search-btn">🔍 Rechercher</button>
+</div>
+
+<!-- PROPERTIES -->
+<section id="biens">
+  <div class="props-header fade-up">
+    <div>
+      <div class="eyebrow">Nos biens</div>
+      <h2 class="sec-title">Sélection <em>exclusive</em></h2>
+    </div>
+    <div class="props-filters" id="filters">
+      <button class="filter-btn active" onclick="filterProps(this,'Tous')">Tous</button>
+      <button class="filter-btn" onclick="filterProps(this,'Villa')">Villas</button>
+      <button class="filter-btn" onclick="filterProps(this,'Appartement')">Appartements</button>
+      <button class="filter-btn" onclick="filterProps(this,'Duplex')">Duplex</button>
+      <button class="filter-btn" onclick="filterProps(this,'Bureau')">Bureaux</button>
+    </div>
+  </div>
+
+  <div class="props-grid" id="propsGrid">
+
+    <div class="prop-card featured fade-up" data-type="Villa">
+      <div class="prop-img-wrap">
+        <div class="prop-img img-placeholder p-villa" style="height:360px">
+          <span style="color:rgba(255,255,255,.15);font-size:5rem">🏡</span>
+          <span style="position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;padding:.3rem .7rem;border-radius:1px">Cocody Golf</span>
+        </div>
+        <div class="prop-badge exclu">Exclusivité</div>
+        <div class="prop-fav">♡</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-type">Villa de luxe</div>
+        <div class="prop-name">Villa Beverly Hills — Cocody Golf 4</div>
+        <div class="prop-loc">📍 Cocody Golf 4, Beverly Hills — Abidjan</div>
+        <div class="prop-details">
+          <div class="prop-detail"><span class="prop-detail-icon">🛏</span> 6 chambres</div>
+          <div class="prop-detail"><span class="prop-detail-icon">🚿</span> 5 SDB</div>
+          <div class="prop-detail"><span class="prop-detail-icon">📐</span> 1 200 m²</div>
+          <div class="prop-detail"><span class="prop-detail-icon">🏊</span> Piscine</div>
+        </div>
+        <div class="prop-price-row">
+          <div class="prop-price">850 M <small>FCFA</small></div>
+          <button class="prop-btn">Voir →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prop-card fade-up" data-type="Appartement">
+      <div class="prop-img-wrap">
+        <div class="prop-img img-placeholder p-appart">
+          <span style="color:rgba(255,255,255,.15);font-size:4rem">🏢</span>
+          <span style="position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;padding:.3rem .7rem;border-radius:1px">Zone 4</span>
+        </div>
+        <div class="prop-badge new">Nouveau</div>
+        <div class="prop-fav">♡</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-type">Appartement</div>
+        <div class="prop-name">Penthouse T4 — Résidence Orchid</div>
+        <div class="prop-loc">📍 Marcory Zone 4, Canal — Abidjan</div>
+        <div class="prop-details">
+          <div class="prop-detail"><span>🛏</span> 4 pièces</div>
+          <div class="prop-detail"><span>🚿</span> 3 SDB</div>
+          <div class="prop-detail"><span>📐</span> 320 m²</div>
+        </div>
+        <div class="prop-price-row">
+          <div class="prop-price">180 M <small>FCFA</small></div>
+          <button class="prop-btn">Voir →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prop-card fade-up" data-type="Villa">
+      <div class="prop-img-wrap">
+        <div class="prop-img img-placeholder p-duplex">
+          <span style="color:rgba(255,255,255,.15);font-size:4rem">🏘</span>
+          <span style="position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;padding:.3rem .7rem;border-radius:1px">2 Plateaux</span>
+        </div>
+        <div class="prop-fav">♡</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-type">Villa basse</div>
+        <div class="prop-name">Villa Moderne — 2 Plateaux Vallon</div>
+        <div class="prop-loc">📍 2 Plateaux Vallon — Abidjan</div>
+        <div class="prop-details">
+          <div class="prop-detail"><span>🛏</span> 5 chambres</div>
+          <div class="prop-detail"><span>🚿</span> 4 SDB</div>
+          <div class="prop-detail"><span>📐</span> 600 m²</div>
+        </div>
+        <div class="prop-price-row">
+          <div class="prop-price">350 M <small>FCFA</small></div>
+          <button class="prop-btn">Voir →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prop-card fade-up" data-type="Duplex">
+      <div class="prop-img-wrap">
+        <div class="prop-img img-placeholder p-terrain">
+          <span style="color:rgba(255,255,255,.15);font-size:4rem">🏠</span>
+          <span style="position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;padding:.3rem .7rem;border-radius:1px">Angré</span>
+        </div>
+        <div class="prop-badge" style="background:var(--gold)">Promo</div>
+        <div class="prop-fav">♡</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-type">Duplex</div>
+        <div class="prop-name">Duplex Prestige — Angré 7ème Tranche</div>
+        <div class="prop-loc">📍 Angré 7ème Tranche — Cocody</div>
+        <div class="prop-details">
+          <div class="prop-detail"><span>🛏</span> 4 chambres</div>
+          <div class="prop-detail"><span>🚿</span> 3 SDB</div>
+          <div class="prop-detail"><span>📐</span> 280 m²</div>
+        </div>
+        <div class="prop-price-row">
+          <div class="prop-price">220 M <small>FCFA</small></div>
+          <button class="prop-btn">Voir →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prop-card fade-up" data-type="Bureau">
+      <div class="prop-img-wrap">
+        <div class="prop-img img-placeholder p-bureau">
+          <span style="color:rgba(255,255,255,.15);font-size:4rem">🏛</span>
+          <span style="position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;padding:.3rem .7rem;border-radius:1px">Plateau</span>
+        </div>
+        <div class="prop-fav">♡</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-type">Bureau</div>
+        <div class="prop-name">Plateau Business Center — 4ème étage</div>
+        <div class="prop-loc">📍 Plateau, Rue du Commerce — Abidjan</div>
+        <div class="prop-details">
+          <div class="prop-detail"><span>📐</span> 450 m²</div>
+          <div class="prop-detail"><span>🚗</span> 8 places</div>
+          <div class="prop-detail"><span>⚡</span> Groupélectrogène</div>
+        </div>
+        <div class="prop-price-row">
+          <div class="prop-price">3,5 M <small>FCFA/mois</small></div>
+          <button class="prop-btn">Voir →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prop-card fade-up" data-type="Appartement">
+      <div class="prop-img-wrap">
+        <div class="prop-img img-placeholder p-imm">
+          <span style="color:rgba(255,255,255,.15);font-size:4rem">🏙</span>
+          <span style="position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;padding:.3rem .7rem;border-radius:1px">Riviera M'Badon</span>
+        </div>
+        <div class="prop-badge new">Nouveau</div>
+        <div class="prop-fav">♡</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-type">Appartement</div>
+        <div class="prop-name">Appartement T3 Vue Lagune — Riviera</div>
+        <div class="prop-loc">📍 Riviera M'Badon — Cocody</div>
+        <div class="prop-details">
+          <div class="prop-detail"><span>🛏</span> 3 pièces</div>
+          <div class="prop-detail"><span>🚿</span> 2 SDB</div>
+          <div class="prop-detail"><span>📐</span> 185 m²</div>
+        </div>
+        <div class="prop-price-row">
+          <div class="prop-price">95 M <small>FCFA</small></div>
+          <button class="prop-btn">Voir →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:3rem">
+    <a href="#" class="btn-gold" style="background:transparent;color:var(--dark);border:1px solid var(--cream2);display:inline-flex">Voir tous nos biens (84) →</a>
+  </div>
+</section>
+
+<!-- FEATURED LISTING -->
+<section class="listing-section" id="selection">
+  <div class="listing-grid">
+    <div class="listing-imgs fade-up">
+      <div class="listing-img-main"><div class="img-placeholder p-villa"><span style="color:rgba(255,255,255,.12);font-size:6rem">🏡</span></div></div>
+      <div class="listing-img-sm"><div class="img-placeholder p-appart" style="height:100%"><span style="color:rgba(255,255,255,.12);font-size:3rem">🏊</span></div></div>
+      <div class="listing-img-sm"><div class="img-placeholder p-bureau" style="height:100%"><span style="color:rgba(255,255,255,.12);font-size:3rem">🍃</span></div></div>
+    </div>
+    <div class="fade-up">
+      <div class="listing-tag">Bien du mois</div>
+      <h2 class="listing-title">Villa <em>Prestige</em><br>Beverly Hills</h2>
+      <p class="listing-desc">Une résidence d'exception nichée dans le quartier le plus prisé d'Abidjan. Finitions haut de gamme, architecture contemporaine, vue panoramique sur le golf. Un bien rare sur le marché.</p>
+      <div class="listing-specs">
+        <div class="listing-spec"><div class="listing-spec-label">Surface</div><div class="listing-spec-val">1 200 m²</div></div>
+        <div class="listing-spec"><div class="listing-spec-label">Chambres</div><div class="listing-spec-val">6 suites</div></div>
+        <div class="listing-spec"><div class="listing-spec-label">Piscine</div><div class="listing-spec-val">Infinity</div></div>
+        <div class="listing-spec"><div class="listing-spec-label">Garage</div><div class="listing-spec-val">4 véhicules</div></div>
+      </div>
+      <div class="listing-price-box">
+        <div><div class="listing-price-label">Prix de vente</div><div class="listing-price-val">850 000 000 FCFA</div></div>
+        <a href="#contact" class="btn-gold" style="text-decoration:none">Nous contacter →</a>
+      </div>
+      <div style="display:flex;gap:1rem">
+        <a href="#" class="btn-ghost" style="font-size:.75rem;padding:.7rem 1.5rem;color:rgba(245,240,232,.6);border-color:rgba(245,240,232,.15)">📋 Brochure PDF</a>
+        <a href="#" class="btn-ghost" style="font-size:.75rem;padding:.7rem 1.5rem;color:rgba(245,240,232,.6);border-color:rgba(245,240,232,.15)">🎥 Visite virtuelle</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="agence">
+  <div class="why-grid">
+    <div class="fade-up">
+      <div class="eyebrow">Pourquoi nous</div>
+      <h2 class="sec-title">L'<em>excellence</em> au service de votre projet</h2>
+      <p class="sec-sub">Depuis 12 ans, nous accompagnons les familles et investisseurs ivoiriens et de la diaspora dans leurs projets immobiliers les plus ambitieux.</p>
+      <div class="why-cards" style="margin-top:2rem">
+        <div class="why-card">
+          <div class="why-card-icon">🎯</div>
+          <div class="why-card-title">Expertise locale</div>
+          <div class="why-card-desc">12 ans de présence à Abidjan. Nous connaissons chaque quartier, chaque immeuble.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🔐</div>
+          <div class="why-card-title">Sécurité juridique</div>
+          <div class="why-card-desc">Chaque transaction vérifiée par nos juristes. ACD, permis de construire, titres fonciers.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🌍</div>
+          <div class="why-card-title">Service diaspora</div>
+          <div class="why-card-desc">Achetez depuis l'étranger en toute confiance. Accompagnement à distance disponible.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">📈</div>
+          <div class="why-card-title">Gestion locative</div>
+          <div class="why-card-desc">Confiez-nous votre bien. Loyers garantis, états des lieux, gestion complète.</div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual fade-up">
+      <div class="why-img-box">
+        <div class="why-img img-placeholder p-imm" style="height:520px;border-radius:2px">
+          <span style="color:rgba(255,255,255,.1);font-size:8rem">🏙</span>
+          <span style="position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;color:rgba(255,255,255,.7);font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;line-height:1.4">« Votre patrimoine, notre priorité depuis 2013 »</span>
+        </div>
+      </div>
+      <div class="why-stat-card">
+        <div class="why-stat-num">98%</div>
+        <div class="why-stat-label">Taux de satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="test-section">
+  <div style="text-align:center;margin-bottom:1rem">
+    <div class="eyebrow" style="justify-content:center;color:var(--gold2)">Témoignages</div>
+    <h2 class="sec-title fade-up" style="color:var(--cream);text-align:center;max-width:100%">Ce que disent <em>nos clients</em></h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card fade-up">
+      <div class="test-text">J'ai acheté ma villa depuis Paris grâce à Prestige Immo. Tout s'est passé à distance, en toute confiance. La transparence et le professionnalisme m'ont vraiment impressionné. Je recommande les yeux fermés.</div>
+      <div class="test-author">
+        <div class="test-avatar">AK</div>
+        <div>
+          <div class="test-name">Ama Kouassi</div>
+          <div class="test-role">Acquéreur · Diaspora France</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card fade-up">
+      <div class="test-text">Notre entreprise cherchait des bureaux au Plateau depuis 6 mois. En 3 semaines avec Prestige Immo, nous avions signé le bail. Une équipe réactive, disponible et vraiment efficace. Merci infiniment.</div>
+      <div class="test-author">
+        <div class="test-avatar">SK</div>
+        <div>
+          <div class="test-name">Serge Koffi</div>
+          <div class="test-role">PDG · Société KOFFI & Associés</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card fade-up">
+      <div class="test-text">La gestion locative de mon immeuble est entre leurs mains depuis 3 ans. Loyers versés à date, rapports mensuels clairs, zéro souci. Une agence sérieuse qui tient vraiment ses engagements.</div>
+      <div class="test-author">
+        <div class="test-avatar">FD</div>
+        <div>
+          <div class="test-name">Fatou Diallo</div>
+          <div class="test-role">Propriétaire · Riviera Bonoumin</div>
+          <div class="test-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section id="agents">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;flex-wrap:wrap;gap:1rem">
+    <div class="fade-up">
+      <div class="eyebrow">L'équipe</div>
+      <h2 class="sec-title">Nos <em>experts</em> à votre service</h2>
+    </div>
+    <a href="#contact" class="btn-gold fade-up" style="text-decoration:none">Prendre rendez-vous →</a>
+  </div>
+  <div class="agents-grid">
+    <div class="agent-card fade-up">
+      <div class="agent-img-wrap">
+        <div class="agent-img img-placeholder" style="background:linear-gradient(160deg,#2A1F35 0%,#5A4A70 100%)"><span style="font-size:5rem;filter:grayscale(1)">👩‍💼</span></div>
+        <div class="agent-flag">⭐</div>
+      </div>
+      <div class="agent-name">Aïssata Koné</div>
+      <div class="agent-role">Directrice Générale</div>
+      <div class="agent-contacts">
+        <a href="tel:+2250700000001" class="agent-contact">📞</a>
+        <a href="https://wa.me/2250700000001" class="agent-contact">💬</a>
+        <a href="mailto:a.kone@prestigeimmo.ci" class="agent-contact">✉</a>
+      </div>
+    </div>
+    <div class="agent-card fade-up">
+      <div class="agent-img-wrap">
+        <div class="agent-img img-placeholder" style="background:linear-gradient(160deg,#1A2F1A 0%,#3A6A3A 100%)"><span style="font-size:5rem;filter:grayscale(1)">👨‍💼</span></div>
+        <div class="agent-flag">🏆</div>
+      </div>
+      <div class="agent-name">Jean-Marc Bah</div>
+      <div class="agent-role">Directeur Commercial</div>
+      <div class="agent-contacts">
+        <a href="tel:+2250700000002" class="agent-contact">📞</a>
+        <a href="https://wa.me/2250700000002" class="agent-contact">💬</a>
+        <a href="mailto:jm.bah@prestigeimmo.ci" class="agent-contact">✉</a>
+      </div>
+    </div>
+    <div class="agent-card fade-up">
+      <div class="agent-img-wrap">
+        <div class="agent-img img-placeholder" style="background:linear-gradient(160deg,#2F1A1A 0%,#7A3A3A 100%)"><span style="font-size:5rem;filter:grayscale(1)">👩‍💼</span></div>
+      </div>
+      <div class="agent-name">Mariam Coulibaly</div>
+      <div class="agent-role">Experte Gestion Locative</div>
+      <div class="agent-contacts">
+        <a href="tel:+2250700000003" class="agent-contact">📞</a>
+        <a href="https://wa.me/2250700000003" class="agent-contact">💬</a>
+        <a href="mailto:m.coulibaly@prestigeimmo.ci" class="agent-contact">✉</a>
+      </div>
+    </div>
+    <div class="agent-card fade-up">
+      <div class="agent-img-wrap">
+        <div class="agent-img img-placeholder" style="background:linear-gradient(160deg,#1A2A3F 0%,#3A5A7F 100%)"><span style="font-size:5rem;filter:grayscale(1)">👨‍💼</span></div>
+      </div>
+      <div class="agent-name">Éric Dosso</div>
+      <div class="agent-role">Expert Juridique & Foncier</div>
+      <div class="agent-contacts">
+        <a href="tel:+2250700000004" class="agent-contact">📞</a>
+        <a href="https://wa.me/2250700000004" class="agent-contact">💬</a>
+        <a href="mailto:e.dosso@prestigeimmo.ci" class="agent-contact">✉</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner" id="contact">
+  <div>
+    <h2 class="cta-title">Un projet <em>immobilier</em> ?<br>Parlons-en.</h2>
+    <p class="cta-sub">Consultation gratuite · Estimation sous 24h · Sans engagement</p>
+  </div>
+  <div>
+    <div class="cta-form">
+      <input class="cta-input" type="text" placeholder="Votre prénom & nom">
+      <input class="cta-input" type="tel" placeholder="WhatsApp (+225...)">
+      <button class="cta-submit">📲 Être rappelé →</button>
+    </div>
+    <div style="margin-top:.75rem;font-size:.75rem;color:rgba(245,240,232,.25)">Ou contactez-nous directement : <a href="tel:+2250700000000" style="color:var(--gold2);text-decoration:none">+225 07 00 00 00 00</a></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Prestige<span>Immo</span></div>
+      <p class="footer-desc">Votre agence immobilière haut de gamme à Abidjan. Vente, location, gestion locative et conseil depuis 2013.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">f</a>
+        <a href="#" class="footer-social">in</a>
+        <a href="#" class="footer-social">ig</a>
+        <a href="https://wa.me/2250700000000" class="footer-social">wa</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Nos biens</div>
+      <ul class="footer-links">
+        <li><a href="#">Villas & Maisons</a></li>
+        <li><a href="#">Appartements</a></li>
+        <li><a href="#">Duplex</a></li>
+        <li><a href="#">Bureaux</a></li>
+        <li><a href="#">Terrains</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Achat & Vente</a></li>
+        <li><a href="#">Location</a></li>
+        <li><a href="#">Gestion locative</a></li>
+        <li><a href="#">Estimation gratuite</a></li>
+        <li><a href="#">Conseil diaspora</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+2250700000000">📞 +225 07 00 00 00 00</a></li>
+        <li><a href="https://wa.me/2250700000000">💬 WhatsApp</a></li>
+        <li><a href="mailto:contact@prestigeimmo.ci">✉ contact@prestigeimmo.ci</a></li>
+        <li><a href="#">📍 Cocody, Abidjan</a></li>
+        <li><a href="#">🕐 Lun–Sam : 8h–19h</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Prestige Immo · Agence agréée · Tous droits réservés</div>
+    <div style="display:flex;gap:1.5rem">
+      <a href="#" style="font-size:.75rem;color:rgba(245,240,232,.2);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#B8952A'" onmouseout="this.style.color='rgba(245,240,232,.2)'">Mentions légales</a>
+      <a href="#" style="font-size:.75rem;color:rgba(245,240,232,.2);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#B8952A'" onmouseout="this.style.color='rgba(245,240,232,.2)'">Confidentialité</a>
+      <span style="font-size:.75rem;color:rgba(245,240,232,.15)">Site réalisé par <span style="color:rgba(184,149,42,.6)">Djih AI</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/2250700000000" class="wa-float" title="Contacter sur WhatsApp">💬</a>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=(mx-4)+'px'; cursor.style.top=(my-4)+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=(rx-18)+'px'; ring.style.top=(ry-18)+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// Tabs
+function setTab(el,label){
+  document.querySelectorAll('.search-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Filters
+function filterProps(btn,type){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prop-card').forEach(card=>{
+    const show = type==='Tous' || card.dataset.type===type;
+    card.style.display = show ? '' : 'none';
+    if(show && card.classList.contains('featured') && type!=='Tous'){
+      card.classList.remove('featured');
+      card.dataset.wasFeatured='true';
+    }
+    if(type==='Tous' && card.dataset.wasFeatured){
+      card.classList.add('featured');
+    }
+  });
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('vis'),i*80);
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// Fav toggle
+document.querySelectorAll('.prop-fav').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    btn.textContent = btn.textContent==='♡'?'♥':'♡';
+    btn.style.color = btn.textContent==='♥'?'#e74c3c':'';
+  });
+});
+</script>
+</body>
+</html>
